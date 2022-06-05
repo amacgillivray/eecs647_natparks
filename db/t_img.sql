@@ -1,0 +1,8 @@
+CREATE OR REPLACE TABLE eecs647.parks(
+    id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
+    url CHAR (255) NOT NULL,     -- URL OF THE IMAGE
+    desc TEXT NOT NULL,          -- IMG DESC
+    author CHAR 128 DEFAULT '',
+    license CHAR 128 DEFAULT '',
+    camera CHAR 128 DEFAULT '',
+    
