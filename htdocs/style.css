@@ -212,6 +212,10 @@ img {
     box-sizing: border-box;
     padding: 8px;
 }
+fieldset.users{
+    border:none;
+    margin-top: 50px;
+}
 
 input[type="submit"] {
     margin-top: 15px;

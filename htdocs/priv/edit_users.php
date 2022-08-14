@@ -85,7 +85,7 @@ function print_form()
         $lacks = array_diff($auths, $has);
         $lacks = array_values($lacks);
 
-        print '<fieldset>';
+        print '<fieldset class="users">';
         print '<legend>' . $keys[$i]. '</legend>';
         print '<table class="userpriv">';
         print '<thead><tr>';
