@@ -20,8 +20,9 @@ require_once(dirname(__FILE__, 2) . "/lib.php");
             <p>The ranger can view and edit entries relating to parks.</p>
             <p>The zoologist can view and edit entries relating to fauna.</p>
 
-            <p><b>To use admin pages, you'll need to <a href="user/login">log in.</a></b></p>
+            <p><b>To use admin pages, you'll need to <a href="user/login.php">log in.</a></b></p>
         </section>
 
 <?php 
+
 \eecs647\print_html_closer();

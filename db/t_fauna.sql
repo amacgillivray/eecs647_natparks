@@ -2,7 +2,7 @@ CREATE OR REPLACE TABLE eecs647.fauna(
     code      CHAR (10) UNIQUE NOT NULL,
     name      CHAR (32) NOT NULL, 
     class     CHAR (32) NOT NULL,
-    `order`     CHAR (32) NOT NULL,
+    `order`   CHAR (32) NOT NULL,
     suborder  CHAR (32) NOT NULL,
     family    CHAR (32) NOT NULL,
     subfamily CHAR (32) NOT NULL,
@@ -269,23 +269,23 @@ insert into eecs647.fauna (
     , endangered
     , fdesc
 ) VALUES (
-    "COYOTE",
-    "Coyote",
-    "Mammalia",
-    "Carnivora",
+    "GATOR",
+    "American Alligator",
+    "Reptilia",
+    "Crocodilia",
     "N/A",
-    "Canidae",
-    "N/A",
-    "Canis",
-    16,
-    4,
-    44,
-    40,
-    60,
-    135,
+    "Alligatoridae",
+    "Alligatorinae",
+    "Alligator",
     12,
+    1,
+    1000,
+    1000, 
+    38,
+    400,
+    70,
     0,
-    "A small predator, the Coyote feeds on deer, rabbits, rodents, birds, and other small game."
+    "The American Alligator is native to the southeastern United States. Its diet consists of fish, birds, reptiles, amphibians, and mammals."
 );
 
 insert into eecs647.fauna (
@@ -307,25 +307,24 @@ insert into eecs647.fauna (
     , endangered
     , fdesc
 ) VALUES (
-    "GATOR",
-    "American Alligator",
-    "Reptilia",
-    "Crocodilia",
+    "BISON",
+    "American Bison",
+    "Mammalia",
+    "Artiodactyla",
     "N/A",
-    "Alligatoridae",
-    "Alligatorinae",
-    "Alligator",
-    12,
+    "Bovidae",
+    "Bovinae",
+    "Bison",
+    160,
+    116,
+    2100,
+    1410, 
+    198,
+    350,
+    20,
     1,
-    1000,
-    1000, 
-    38,
-    400,
-    70,
-    0,
-    "The American Alligator is native to the southeastern United States. Its diet consists of fish, birds, reptiles, amphibians, and mammals."
+    "The American Bison is one of two extant bison species. While historic ranges stretched from as far north as New York to as far south as Florida, bison numbers have thinned dramatically over several centuries. Once 60 million strong, the species fell to a population of just 541 animals in 1889, and has since recovered to its modern population of about 31,000."
 );
-
 
 
 DELIMITER ;

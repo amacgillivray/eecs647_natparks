@@ -27,59 +27,58 @@ CREATE OR REPLACE TABLE eecs647.userauth
     , PRIMARY KEY (user, auth)
 );
 
--- CREATE OR REPLACE PROCEDURE 
---     eecs647.getuseraut ( IN arguser CHAR (10) ) 
--- READS SQL DATA
--- BEGIN 
--- SELECT eecs647.userauth.auth 
--- FROM   eecs647.userauth
--- WHERE  user = arguser
--- ORDER BY eecs647.userauth.auth;
--- END// 
+CREATE OR REPLACE PROCEDURE eecs647.crtusr ( 
+    IN arguser CHAR (10), 
+    IN argpwrd CHAR (128)
+) 
+MODIFIES SQL DATA
+BEGIN 
+INSERT 
+    INTO eecs647.users ( uname, pwrd ) 
+    VALUES ( arguser, argpwrd );
+END// 
 
+CREATE OR REPLACE PROCEDURE eecs647.dltusr ( 
+    IN arguser CHAR (10)
+) 
+MODIFIES SQL DATA
+BEGIN 
+DELETE
+    FROM  eecs647.users
+    WHERE user = arguser 
+END// 
 
--- CREATE OR REPLACE PROCEDURE eecs647.crtusr ( 
---     IN arguser CHAR (10), 
---     IN argpwrd CHAR (128)
--- ) 
--- MODIFIES SQL DATA
--- BEGIN 
--- INSERT 
---     INTO eecs647.users ( user, pwrd ) 
---     VALUES ( arguser, argpwrd );
--- END// 
+CREATE OR REPLACE PROCEDURE 
+    eecs647.getusrauth ( IN arguser CHAR (10) ) 
+READS SQL DATA
+BEGIN 
+SELECT eecs647.userauth.auth 
+FROM   eecs647.userauth
+WHERE  user = arguser
+ORDER BY eecs647.userauth.auth;
+END// 
 
--- CREATE OR REPLACE PROCEDURE eecs647.dltusr ( 
---     IN arguser CHAR (10)
--- ) 
--- MODIFIES SQL DATA
--- BEGIN 
--- DELETE
---     FROM  eecs647.users
---     WHERE user = arguser 
--- END// 
+CREATE OR REPLACE PROCEDURE eecs647.grant ( 
+    IN arguser CHAR (10), 
+    IN argauth CHAR (10)
+) 
+MODIFIES SQL DATA
+BEGIN 
+INSERT 
+    INTO eecs647.userauth ( user, auth ) 
+    VALUES ( arguser, argauth );
+END// 
 
--- CREATE OR REPLACE PROCEDURE eecs647.grant ( 
---     IN arguser CHAR (10), 
---     IN argauth CHAR (10)
--- ) 
--- MODIFIES SQL DATA
--- BEGIN 
--- INSERT 
---     INTO eecs647.userauth ( user, auth ) 
---     VALUES ( arguser, argauth );
--- END// 
+CREATE OR REPLACE PROCEDURE eecs647.revoke ( 
+    IN arguser CHAR (10), 
+    IN argauth CHAR (10)
+) 
+MODIFIES SQL DATA
+BEGIN 
+DELETE
+    FROM eecs647.userauth
+    WHERE user = arguser 
+      AND auth = argauth;
+END// 
 
--- CREATE OR REPLACE PROCEDURE eecs647.revoke ( 
---     IN arguser CHAR (10), 
---     IN argauth CHAR (10)
--- ) 
--- MODIFIES SQL DATA
--- BEGIN 
--- DELETE
---     FROM eecs647.userauth
---     WHERE user = arguser 
---       AND auth = argauth;
--- END// 
-
--- DELIMITER ;
+DELIMITER ;

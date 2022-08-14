@@ -18,8 +18,18 @@ CREATE OR REPLACE TABLE eecs647.flora(
     name CHAR (32) NOT NULL, 
     fdesc TEXT NOT NULL,
     endangered TINYINT UNSIGNED NOT NULL,
+    image CHAR (255),
     invasive BOOLEAN NOT NULL,
     poisonous BOOLEAN NOT NULL,
     PRIMARY KEY (name)
 );
 
+CREATE OR REPLACE TABLE eecs647.fauna(
+    name CHAR (32) NOT NULL, 
+    fdesc TEXT,
+    weight_m DECIMAL( 3, 0 ),
+    weight_f DECIMAL( 3, 0 ),
+    lifespan DECIMAL( 3, 0 ),
+    endangered TINYINT UNSIGNED,
+    PRIMARY KEY (name)
+);
