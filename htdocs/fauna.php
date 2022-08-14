@@ -20,7 +20,8 @@ $stmt = $conn->prepare(
     "SELECT * 
     FROM eecs647.fauna 
     LEFT JOIN eecs647.image ON fauna.code = image.lfauna
-    ORDER BY class, `order`, family, genus;"
+    GROUP BY fauna.code
+    ORDER BY class, `order`, family, genus"
 );
 // $stmt = $conn->prepare(
 //     "SELECT DISTINCT * 
