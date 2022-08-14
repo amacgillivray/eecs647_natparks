@@ -25,7 +25,7 @@ function get_entries() : array
     LEFT JOIN eecs647.parks ON eecs647.parks.id = eecs647.parkfauna.id
     LEFT JOIN eecs647.fauna ON eecs647.fauna.code = eecs647.parkfauna.code
     GROUP BY eecs647.parks.pname, eecs647.fauna.name, eecs647.parkfauna.id, eecs647.parkfauna.code
-    ORDER BY parkfauna.id DESC
+    ORDER BY parks.pname, fauna.name
     PF_FETCH;
 
     $conn = new PDO('odbc:eecs647');
