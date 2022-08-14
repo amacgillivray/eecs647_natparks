@@ -41,7 +41,6 @@ function handle_edits()
     DELETE FROM eecs647.parkfauna WHERE id = ? AND code = ?
     PF_DELETE;
 
-
     $keys = array_filter(
         array_keys($_POST),
         function($field){
@@ -88,25 +87,46 @@ function handle_edits()
             if ($stmt->execute([$fieldset[0], $fieldset[1], $old_park, $old_fauna]))
                 $edits++;
         }
-
     } catch (Exception $e) {
         $conn->rollBack();
         setcookie('pgmsg', $e->getMessage(), time()+30, '/');
         header('Location: /priv/edit_parkfauna.php');
     }
     $conn->commit();
-    setcookie('pgmsg', "Successfully modified $edits rows.", time()+30, '/');
+
+    if ($edits > 0)
+        setcookie('pgmsg', "Successfully modified $edits rows.", time()+30, '/');
     header('Location: /priv/edit_parkfauna.php');
 }
 
 function handle_add()
 {
-//    $query =
+//    var_dump($_POST);
+    $query = <<<'PF_INSERT'
+    INSERT INTO eecs647.parkfauna ( id, code )
+    VALUES ( ?, ? )
+    PF_INSERT;
 
-//    $conn = new PDO('odbc:eecs647');
-//    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//    $stmt = $conn->prepare($query);
-//    $stmt->execute();
+    if (empty($_POST['newpf_park']) && empty($_POST['newpf_spec']))
+        return;
+
+    $conn = new PDO('odbc:eecs647');
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->beginTransaction();
+    try {
+        $stmt = $conn->prepare($query);
+        $stmt->execute(
+            [$_POST['newpf_park'], $_POST['newpf_spec']]
+        );
+    } catch (Exception $e) {
+        $conn->rollBack();
+        setcookie('pgmsg', "Failed to insert row:<br/>" . $e->getMessage(), time()+30, '/');
+        header('Location: /priv/edit_parkfauna.php');
+    }
+    $conn->commit();
+    setcookie('pgmsg', "Successfully added relationship between "
+        . $_POST['newpf_park'] . ' and ' . $_POST['newpf_spec']. '.', time()+30, '/');
+    header('Location: /priv/edit_parkfauna.php');
 }
 
 function print_form()
@@ -176,8 +196,6 @@ function do_page()
         \eecs647\print_html_closer();
         exit();
     }
-
-    # Todo - Check for POST arguments and handle form submission
 
     $msg = (isset($_COOKIE['pgmsg'])) ? '<p><b style="color:coral">OPERATION HAD EFFECT:</b><br/>'.$_COOKIE['pgmsg'].'</p>' : '';
 
