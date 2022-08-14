@@ -19,6 +19,7 @@ $stmt = $conn->prepare(
     "SELECT * 
     FROM eecs647.parks
     LEFT JOIN eecs647.image ON parks.id = image.lpark
+    GROUP BY parks.id
     ORDER BY sqrmi DESC"
 );
 $stmt->execute();
