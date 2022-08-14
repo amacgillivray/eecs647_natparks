@@ -1,17 +1,10 @@
 <?php 
 require_once '../../lib.php';
 
-const pfa_cols_editable = [
-    "pname" => [
-        "label"       => "Park Name",
-        "type"        => "text",
-        "constraints" => 'maxlength="128"'
-    ],
-    "code" => [
-        "label"       => "Fauna Code",
-        "type"        => "text",
-        "constraints" => 'maxlength="10"'
-    ]
+const auths = [
+    'ADMIN',
+    'ZOO',
+    'RGR'
 ];
 
 function get_entries() : array
@@ -78,6 +71,18 @@ function print_form()
 }
 
 \eecs647\print_html_opener('Edit Images');
+
+// Check Privileges
+if (!\eecs647\authorized_user(auths))
+{
+    print '<section id="pf">';
+    \eecs647\print_err_privs();
+    print '</section>';
+    \eecs647\print_html_closer();
+    exit();
+}
+
+# Todo - Check for POST arguments and handle form submission
 
 // Show the form to edit parks
 print '<section id="pf">';
