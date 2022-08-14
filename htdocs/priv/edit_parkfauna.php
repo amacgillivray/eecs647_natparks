@@ -85,5 +85,28 @@ if (!\eecs647\authorized_user(auths))
 # Todo - Check for POST arguments and handle form submission
 
 // Show the form to edit parks
-print '<section id="pf">';
-print '<h1>Editing Park-Fauna Relationships</h1>';
+print <<<'PAGEOPENER'
+<section id="pf">
+<h1>Editing Park-Fauna Relationships</h1>
+<p>Each Park -> Species Relationship indicates that, within the designated park, the specified species can be found.</p>
+<article>
+    <form id="new_pf" action="#" method="POST">
+        <h3>Add New Relationship</h3>
+        <p>You can add a new Park-Fauna relationship using these fields and the submit button below. Note that submitting will lose any unsaved changes 
+            the row-editor form below the submit button.</p>
+        <div class="fl-pair fl-pair-text">
+            <label for="newpf_park">Park ID</label>
+            <input id="newpf_park" name="newpf_park" type="text" maxlength="10" value="">
+        </div>
+        <div class="fl-pair fl-pair-text">
+            <label for="newpf_spec">Fauna Code</label>
+            <input id="newpf_spec" name="newpf_spec" type="text" maxlength="10" value="">
+        </div>
+        <input type="Submit" value="Add New Relationship &raquo;">
+    </fieldset>
+</article>
+PAGEOPENER;
+print_form();
+print '</section>';
+
+\eecs647\print_html_closer();
