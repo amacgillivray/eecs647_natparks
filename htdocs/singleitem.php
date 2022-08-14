@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+use function eecs647\determine_average_image_color;
+use function eecs647\determine_readable_text_color_for_background;
+
 require_once(dirname(__FILE__, 2) . "/lib.php");
 
 function do_page()
@@ -108,12 +112,63 @@ function query_for_park( $query )
             '</div>' .
     '</div>';
 
+    # GET PHOTOS
+    $stmt = $conn->prepare(
+        "SELECT * 
+        FROM eecs647.image
+        WHERE eecs647.image.lpark = ?
+        ORDER BY image.dattkn"
+    );
+    $stmt->bindParam(
+        1,
+        $query
+    );
+    $stmt->execute([$park['id']]);
+    $photos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//    print '<h2>Photos of ' . $park['pname'] . '</h2>';
+    if (sizeof($photos) === 0)
+    {
+//        print '<p>No photos available.</p>';
+    } else {
+        print '<div class="photogrid">';
+        for ($i = 0; $i < sizeof($photos); $i++) {
+            $photo = $photos[$i];
+            if ($photo["fpath"] !== null) {
+                $color = determine_average_image_color('_img/' . $photo['fpath']);
+                $text = determine_readable_text_color_for_background($color);
+                print '<div class="park" style="background-color:' . $color . ';color:' . $text . ' !important">';
+                print '<div class="cited-img">';
+                print '<img src="/_img/' . $photo["fpath"] . '">';
+                print '<p class="photinfo">';
+                print '<strong>' . $photo["author"] . '</strong><br/>';
+                print $photo["license"];
+                print '</p>';
+
+                print '<p><small><i>'.$photo['idesc'].'</i></small></p>';
+
+                print '<small>' .
+                    '<b>Camera Manufacturer:</b> ' . $photo['mfr'] . '<br/>' .
+                    '<b>Camera Model:</b> ' . $photo['mod'] . '<br/>' .
+                    '<b>Exposure Time:</b> ' . $photo['exposure'] . '<br/>' .
+                    '<b>F Number:</b> ' . $photo['fnum'] . '<br/>' .
+                    '<b>ISO:</b> ' . $photo['iso'] . '<br/>' .
+                    '<b>Focal Length:</b> ' . $photo['foclen'] . '<br/>' .
+                    '</small>';
+
+
+                print '</div></div>';
+            }
+        }
+        print '</div>';
+    }
+
+
+    # FAUNA
     print "<h2>Fauna in " . $park['pname'] . '</h2>';
     print '<p>Sorted alphabetically by taxonomy (class, order, etc.)</p>';
-
     foreach ( $rows as $fauna )
     {
-        print '<div style="width:85%;margin:auto;margin-bottom:25px;">';
+        print '<div style="margin-bottom:25px;">';
         print '<h3>' . $fauna["name"] . '</h3>';
         print '<strong>';
         foreach (["class", "order", "suborder", "family", "subfamily", "genus"] as $tax)
@@ -255,6 +310,55 @@ function query_for_fauna( $query )
             '</div>' .
 
         '</div>';
+
+    # GET PHOTOS
+    $stmt = $conn->prepare(
+        "SELECT * 
+        FROM eecs647.image
+        WHERE eecs647.image.lfauna = ?
+        ORDER BY image.dattkn"
+    );
+    $stmt->bindParam(
+        1,
+        $query
+    );
+    $stmt->execute([$fauna['code']]);
+    $photos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (sizeof($photos) > 0)
+    {
+        print '<div class="photogrid">';
+        for ($i = 0; $i < sizeof($photos); $i++) {
+            $photo = $photos[$i];
+            if ($photo["fpath"] !== null) {
+                $color = determine_average_image_color('_img/' . $photo['fpath']);
+                $text = determine_readable_text_color_for_background($color);
+                print '<div class="park" style="background-color:' . $color . ';color:' . $text . ' !important">';
+                print '<div class="cited-img">';
+                print '<img src="/_img/' . $photo["fpath"] . '">';
+                print '<p class="photinfo">';
+                print '<strong>' . $photo["author"] . '</strong><br/>';
+                print $photo["license"];
+                print '</p>';
+
+                print '<p><small><i>'.$photo['idesc'].'</i></small></p>';
+
+                print '<small>' .
+                    '<b>Camera Manufacturer:</b> ' . $photo['mfr'] . '<br/>' .
+                    '<b>Camera Model:</b> ' . $photo['mod'] . '<br/>' .
+                    '<b>Exposure Time:</b> ' . $photo['exposure'] . '<br/>' .
+                    '<b>F Number:</b> ' . $photo['fnum'] . '<br/>' .
+                    '<b>ISO:</b> ' . $photo['iso'] . '<br/>' .
+                    '<b>Focal Length:</b> ' . $photo['foclen'] . '<br/>' .
+                    '</small>';
+
+
+                print '</div></div>';
+            }
+        }
+        print '</div>';
+    }
+
+
 
     print '<h2>Parks where ' . $fauna['name'] . ' are found:</h2>';
     foreach ( $rows as $park )
