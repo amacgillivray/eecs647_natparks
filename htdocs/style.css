@@ -45,7 +45,8 @@ section > * {
 }
 
 .fauna,
-.park {
+.park,
+.parkfauna{
     margin: 15px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -57,6 +58,12 @@ section > * {
     0 8px 8px rgba( 0, 0, 0, 0.1 ), 
     0 16px 16px rgba( 0, 0, 0, 0.1 ), 
     0 32px 32px rgba( 0, 0, 0, 0.1 );
+}
+
+.parkfauna {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
 }
 
 .fl-pair 
