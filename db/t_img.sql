@@ -459,39 +459,107 @@ CREATE OR REPLACE TABLE eecs647.image(
 --     '350 mm'
 -- );
 
-insert into eecs647.image(
-    lfauna,
-    lpark,
-    fpath,
-    natw,
-    nath,
-    idesc,
-    author,
-    dattkn,
-    license,
-    mfr,
-    `mod`,
-    exposure,
-    fnum,
-    iso,
-    foclen
-) VALUES (
-    null,
-    "RCKMTN",
-    'rmnp.jpg',
-    2048,
-    1364,
-    'Sunset at Bear Lake in Rocky Mountain National Park',
-    'Dixie Lawrence',
-    '2008-09-27',
-    'CC-NC-ND',
-    'Canon',
-    'Canon EOS Digital Rebel XTi',
-    null,
-    'f/8.0',
-    'ISO-100',
-    '12 mm'
-);
+-- insert into eecs647.image(
+--     lfauna,
+--     lpark,
+--     fpath,
+--     natw,
+--     nath,
+--     idesc,
+--     author,
+--     dattkn,
+--     license,
+--     mfr,
+--     `mod`,
+--     exposure,
+--     fnum,
+--     iso,
+--     foclen
+-- ) VALUES (
+--     null,
+--     "RCKMTN",
+--     'rmnp.jpg',
+--     2048,
+--     1364,
+--     'Sunset at Bear Lake in Rocky Mountain National Park',
+--     'Dixie Lawrence',
+--     '2008-09-27',
+--     'CC-NC-ND',
+--     'Canon',
+--     'Canon EOS Digital Rebel XTi',
+--     null,
+--     'f/8.0',
+--     'ISO-100',
+--     '12 mm'
+-- );
+
+-- insert into eecs647.image(
+--     lfauna,
+--     lpark,
+--     fpath,
+--     natw,
+--     nath,
+--     idesc,
+--     author,
+--     dattkn,
+--     license,
+--     mfr,
+--     `mod`,
+--     exposure,
+--     fnum,
+--     iso,
+--     foclen
+-- ) VALUES (
+--      null,
+--      "YLWSTN",
+--      'ylwstn.jpg',
+--      2048,
+--      1152,
+--      'Yellowstone National Park',
+--      'PinkFloydFanSince1986 (Flickr)',
+--      '2016-08-30',
+--      'CC BY-SA',
+--      'Canon',
+--      'Canon EOS 700D',
+--      '1/160 sec',
+--      'f/8.0',
+--      'ISO-200',
+--      '28 mm'
+--  );
+
+-- insert into eecs647.image(
+--     lfauna,
+--     lpark,
+--     fpath,
+--     natw,
+--     nath,
+--     idesc,
+--     author,
+--     dattkn,
+--     license,
+--     mfr,
+--     `mod`,
+--     exposure,
+--     fnum,
+--     iso,
+--     foclen
+-- ) VALUES (
+--      null,
+--      "EVRGLD",
+--      'glades.jpg',
+--      2048,
+--      986,
+--      'Sunset in the Everglades',
+--      'Rudy Wilms',
+--      '2016-12-24',
+--      'CC BY-NC-ND',
+--      'Nikon',
+--      'D810',
+--      '30 sec',
+--      'f/8.0',
+--      null,
+--      '50 mm'
+--  );
 
 
 -- insert into eecs647.image(

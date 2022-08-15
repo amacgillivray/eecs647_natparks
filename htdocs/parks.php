@@ -18,27 +18,37 @@ catch (Exception $e)
 $stmt = $conn->prepare(
     "SELECT * 
     FROM eecs647.parks
-    LEFT JOIN eecs647.image ON parks.id = image.lpark
-    GROUP BY parks.id
+    LEFT JOIN eecs647.image ON parks.id = image.lpark 
+    GROUP BY parks.id, image.fpath
     ORDER BY sqrmi DESC"
 );
 $stmt->execute();
 
 // var_dump($stmt);
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($rows);
 
 print_html_opener('Parks');
 print '<section id="parks">';
 
-foreach ( $rows as $park )
+$printed_parks = [];
+
+for ($i = 0; $i < sizeof($parks); $i++)
 {
+    $park = $parks[$i];
+    if (in_array($park['id'],$printed_parks))
+        continue;
+
+//    if (!empty($park['lfauna']) && $parks[$i+1]['id'] == $park['id'] && empty($parks[$i+1]['lfauna']))
+    if (!empty($park['lfauna']))
+        continue;
+
+    $printed_parks[] = $park['id'];
+
     foreach (["camp", "alch", "guns"] as $trait)
     {
         $park[$trait] = ($park[$trait] === '1') ? "Allowed" : "Prohibited";
     }
-
-
 
     if ($park["fpath"] !== null) {
         $color = determine_average_image_color('_img/' . $park['fpath']);
