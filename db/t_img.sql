@@ -459,6 +459,41 @@ CREATE OR REPLACE TABLE eecs647.image(
 --     '350 mm'
 -- );
 
+insert into eecs647.image(
+    lfauna,
+    lpark,
+    fpath,
+    natw,
+    nath,
+    idesc,
+    author,
+    dattkn,
+    license,
+    mfr,
+    `mod`,
+    exposure,
+    fnum,
+    iso,
+    foclen
+) VALUES (
+    null,
+    "RCKMTN",
+    'rmnp.jpg',
+    2048,
+    1364,
+    'Sunset at Bear Lake in Rocky Mountain National Park',
+    'Dixie Lawrence',
+    '2008-09-27',
+    'CC-NC-ND',
+    'Canon',
+    'Canon EOS Digital Rebel XTi',
+    null,
+    'f/8.0',
+    'ISO-100',
+    '12 mm'
+);
+
+
 -- insert into eecs647.image(
 --     lfauna,
 --     lpark,
