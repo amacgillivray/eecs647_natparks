@@ -1,4 +1,0 @@
-NOTE ON COPYING THIS CODE --
-
-Requires PHP 7.4 with PDO_ODBC
-Requires ODBC configuration
