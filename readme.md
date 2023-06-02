@@ -9,3 +9,4 @@ NOTE ON COPYING THIS CODE --
  - Requires PHP 7.4 with PDO_ODBC
  - Requires MariaDB
  - Requires ODBC configuration
+ - May be incomplete/broken. Was developed remotely and I forgot to put more money in my Digital Ocean account, and everything I had not committed was lost.
