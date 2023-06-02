@@ -7,4 +7,5 @@ National Parks mockup database - final project for KU EECS 647 (Databases)
 NOTE ON COPYING THIS CODE --
 
  - Requires PHP 7.4 with PDO_ODBC
+ - Requires MariaDB
  - Requires ODBC configuration
